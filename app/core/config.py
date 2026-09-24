@@ -7,13 +7,14 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
 
     # Database URLs
-    # ADMIN_DATABASE_URL: Used by Alembic for schema migrations (superuser)
     ADMIN_DATABASE_URL: str
-
-    # APP_DATABASE_URL: Used by FastAPI at runtime (least privilege, enforces RLS)
     APP_DATABASE_URL: str
 
-    # Load environment variables from the .env file
+    # Security & JWT Configuration
+    JWT_SECRET_KEY: str = "enterprise_super_secret_signing_key_change_in_production"
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
